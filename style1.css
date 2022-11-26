@@ -1,0 +1,115 @@
+#main
+{
+    position: relative;
+    background: #000000;
+}
+
+#text
+{
+    margin-left: 5%;
+    position: absolute;
+width: 90%;
+height: 50%;
+left: 0px;
+top: 184px;
+
+font-family: 'Inter';
+font-style: normal;
+font-weight: 700;
+font-size: 250px;
+line-height: 250px;
+/* or 100% */
+color: #FFED00;
+}
+
+#ButtonEnter
+{
+    font-size: 30px;
+    height: 100%;
+    width: 10%;
+float:right;
+    margin-top:5%;
+    margin-right: 10%;
+    border: 3px solid  #FFED00;
+    background-color: #000000;
+    border-radius: 20px;
+    color:white;
+    padding: 10px;
+    text-align: center;
+}
+
+#ButtonEnter:hover
+{
+    color:#000;
+    background-color: #FFF;
+}
+#ButtonRegist
+{
+    font-size: 30px;
+    height: 100%;
+    width: 17%;
+float:right;
+    margin-top:5%;
+    margin-right: 5%;
+    border: 3px solid  #FFED00;
+    background-color: #000000;
+    border-radius: 20px;
+    color:white;
+    padding: 10px;
+    text-align: center;
+}
+#ButtonRegist:hover
+{
+    color:#000;
+    width:
+    background-color: #FFF;
+}
+#Enter, #Regist
+{
+    font-size: 40px;
+    border: 3px solid  #FFED00;
+    border-radius: 50px;
+    position: fixed;
+    height: 50%;
+    width: 30%;
+   margin-left: 35%;
+   margin-top: 5%;
+    background-color:darkgray;
+    border-radius: 30px;
+    display: none;
+    padding: 10px;
+    text-align: center;
+}
+
+.txt
+{
+    font-size: 30px;
+
+}
+.vvod
+{
+    font-size: 25px;
+    border-radius: 30px;
+    background-color:#f3f58d;
+    border: 3px solid  #000;
+    border-radius: 15px;
+}
+
+.but
+{
+    font-size: 20px;
+    border-radius: 30px;
+    background-color:#f3f58d;
+    border: 3px solid  #000;
+}
+.but_text{
+  text-align: center;
+  text-decoration: none;
+  color: red;
+}
+.but:hover
+{
+    background-color:#000;
+    border: 3px solid #f3f58d;
+    color: #FFF;
+}

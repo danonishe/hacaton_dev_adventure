@@ -1,0 +1,163 @@
+* {
+  margin: 0px;
+  padding: 0px;
+}
+body {
+  font-size: 120%;
+  background: #979595;
+}
+
+.header {
+  width: 30%;
+  margin: 50px auto 0px;
+  color: #ffffff;
+  background: #000;
+  text-align: center;
+  border: 1px solid #ffffff;
+  border-bottom: none;
+  border-radius: 10px 10px 0px 0px;
+  padding: 20px;
+}
+form, .content {
+  width: 30%;
+  margin: 0px auto;
+  padding: 20px;
+  border: 1px solid #ffffff;
+  background: #e6de7a;
+  border-radius: 0px 0px 10px 10px;
+}
+.input-group {
+  margin: 10px 0px 10px 0px;
+}
+.input-group label {
+  display: block;
+  text-align: left;
+  margin: 3px;
+}
+.input-group input {
+  height: 30px;
+  width: 93%;
+  padding: 5px 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid gray;
+}
+.btn {
+  padding: 10px;
+  font-size: 15px;
+  color: rgb(0, 0, 0);
+  background: #e6de7a;
+  border: none;
+  border-radius: 10px;
+  border: 1px solid gray;
+}
+.error {
+  width: 92%;
+  margin: 0px auto;
+  padding: 10px;
+  border: 1px solid #a94442;
+  color: #a94442;
+  background: #f2dede;
+  border-radius: 5px;
+  text-align: left;
+}
+.success {
+  color: #3c763d;
+  background: #dff0d8;
+  border: 1px solid #3c763d;
+  margin-bottom: 20px;
+}
+
+#shapka
+{
+width: 100%;
+height: 200px;
+background-color: #e6de7a;
+display:flex;
+align-items: flex-end;
+}
+
+.knopka
+{
+    
+    font-size: 40px;
+    height: 70px;
+    border:0ch;
+    background-color: #e6de7a;
+    color:black;
+    width: 33.3333%;
+    transform: skew(-30deg);
+}
+
+.exit
+{
+ position:absolute;
+    top: 1%;
+right: 2%;
+  padding: 10px;
+  font-size: 15px;
+  color: #000000;
+  background: #e6de7a;
+  border: 2px solid #494949;;
+  border-radius: 10px;
+  text-decoration-line: none;
+
+}
+
+.exit:hover
+{
+    color: #e6de7a;
+    background: #000;
+}
+
+.knopka:hover
+{
+    background-color: #979354;
+}
+
+table
+{
+     width: 80%;
+     height: 100%;
+     font-size: 35px;
+     color:#000;
+
+}
+td {
+  border:3px solid  #363636;
+  ;
+  border-radius: 5px;
+}
+
+.but 
+{
+  position:absolute;
+  bottom: 3%;
+right: 2%;
+padding: 10px;
+font-size: 25px;
+color: #000000;
+background: #e6de7a;
+border: 2px solid #494949;;
+border-radius: 10px;
+text-decoration-line: none;
+}
+.but:hover
+{
+    color: #e6de7a;
+    background: #000;
+}
+
+#Profile
+{
+display:block;
+}
+#People
+{
+display: none;
+}
+
+#Progress
+{
+  display: none;
+}
