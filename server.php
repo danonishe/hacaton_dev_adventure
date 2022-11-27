@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 
 // initializing variables
@@ -81,6 +82,64 @@ if (isset($_POST['reg_user']))
   }
 }
 
+if  (isset($_POST['save_user']))
+{
+  $arr="";
+  $username = mysqli_real_escape_string($db, $_SESSION['username']);
+  $position = mysqli_real_escape_string($db, $_POST['position']);
+  $hobbies = mysqli_real_escape_string($db, $_POST['hobbies']);
+  $current = mysqli_real_escape_string($db, $_POST['current']);
+  $finish = mysqli_real_escape_string($db, $_POST['finish']);
+
+  $query = "UPDATE `users` SET `position` = '$position', `hobbies` = '$hobbies', `current` = '$current', `finish` = ' $finish' WHERE `username` = '$username'";
+	mysqli_query($db, $query);
+  $_SESSION['position'] = $position;
+  $_SESSION['hobbies'] = $hobbies;
+  $_SESSION['current'] = $current;
+  $_SESSION['finish'] = $finish;
+  $_SESSION['success'] = "Saved";
+  header('location: index.php');
+}
+
+
+if (isset($_POST['check']))
+{
+  $username = mysqli_real_escape_string($db, $_SESSION['username']);
+  $id = mysqli_real_escape_string($db, $_POST['id']);
+
+  $query = "SELECT array_id FROM users WHERE username='$username'";
+  $results = mysqli_query($db, $query);
+
+$conn = new mysqli("localhost", "root", "root", "registration");
+if($conn->connect_error){
+  die("Ошибка: " . $conn->connect_error);
+}
+$sql = "SELECT * FROM users WHERE username = '$username'";
+if($result = $conn->query($sql))
+{
+    $rowsCount = $result->num_rows; // количество полученных строк
+    foreach($result as $row)
+    {
+      $arr = $row["array_id"];
+      
+    }
+  $result->free();
+} 
+else
+{
+  echo "Ошибка: " . $conn->error;
+}
+
+
+$conn->close();
+$id.=' '.$arr;
+$sql1 = "UPDATE `users` SET `array_id` = '$id' WHERE `username` = '$username'";
+	mysqli_query($db, $sql1);
+
+
+ header('location: index.php');
+}
+
 
 
 
@@ -96,7 +155,8 @@ if (isset($_POST['login_user'])) {
   	array_push($errors, "Password is required");
   }
 
-  if (count($errors) == 0) {
+  if (count($errors) == 0) 
+  {
   	$password = md5($password);
   	$query = "SELECT * FROM users WHERE username='$username' AND password='$password'";
     
@@ -115,6 +175,7 @@ if (isset($_POST['login_user'])) {
         $rowsCount = $result->num_rows; // количество полученных строк
         foreach($result as $row)
         {
+          $_SESSION['id'] = $row["id"];
           $_SESSION['birthday'] = $row["birthday"];
           $_SESSION['username'] = $row["username"];
           $_SESSION['email'] = $row["email"];

@@ -1,5 +1,7 @@
 <?php 
-  session_start(); 
+session_start(); 
+include('server.php');
+  
 
   if (!isset($_SESSION['username']) )
    {
@@ -19,7 +21,7 @@
 <head>
 	<title>Home</title>
 	<link rel="stylesheet" type="text/css" href="style.css">
-	<script type="text/javascript" src="file.js"></script>
+	
 </head>
 <body>
 <div class>
@@ -47,36 +49,128 @@
 </div>
 
 <div id="Profile">
-    <table>
-        <tr><td>Ваше имя</td><td><?php echo $_SESSION['username']; ?></td></tr>
-        <tr><td>Ваша почта</td><td><?php echo $_SESSION['email']; ?></td></tr>
-        <tr><td>Ваша должность</td><td><?php echo $_SESSION['position']; ?></td></tr>
-		<tr><td>Ваши хобби</td><td><?php echo $_SESSION['hobbies']; ?></td></tr>
-		<tr><td>Ваши текущие проекты</td><td><?php echo $_SESSION['current']; ?></td></tr>
-		<tr><td>Ваши завершенные проекты</td><td><?php echo $_SESSION['finish']; ?></td></tr>
-    </table>
-	<button class="but">Редактировать</button>
+
+<form method="post" action="index.php">
+<div class="input-group">
+  	  <label>Имя пользователя</label>
+  	  <input type="text" class="p" name="username" readonly value="<?php echo $_SESSION['username']; ?>">
+	 
+  	</div>
+
+  	<div class="input-group">
+  	  <label>Адрес электронной почты</label>
+  	  <input type="email"  class="p" name="email" readonly  value="<?php echo $_SESSION['email']; ?>">
+  	</div>
+	  <div class="input-group">
+  	  <label>Дата рождения</label>
+  	  <input type="date"  class="p" name="birthday" readonly value="<?php echo  $_SESSION['birthday'] ; ?>">
+  	</div>
+
+	  <div class="input-group">
+  	  <label>Должность</label>
+  	  <input type="text"  class="p" name="position" disabled value="<?php echo  $_SESSION['position']; ?>">
+  	</div>
+	
+	  <div class="input-group">
+  	  <label>Хобби</label>
+  	  <input type="text"  class="p" name="hobbies" disabled value="<?php echo$_SESSION['hobbies']; ?>">
+  	</div>
+	
+	  <div class="input-group">
+  	  <label>Текущие проекты</label>
+  	  <input type="text" class="p" name="current" disabled value="<?php echo $_SESSION['current']; ?>">
+  	</div>
+	  <div class="input-group">
+  	  <label>Завершенные проекты</label>
+  	  <input type="text" class="p" name="finish" value="<?php echo  $_SESSION['finish']; ?>" disabled>
+  	</div>
+	  <div class="input-group">
+  	  <button type="submit" name="save_user">Сохранить</button>
+  	</div>
+	  <div class="input-group">
+  	<button type="button" onClick="Edit()"> Редактировать</button>
+  	</div>
+</form>
+
+
+	<script>function Edit() 
+			{
+				document.getElementsByClassName('p')[3].disabled=false;
+				document.getElementsByClassName('p')[4].disabled=false;
+				document.getElementsByClassName('p')[5].disabled=false;
+				document.getElementsByClassName('p')[6].disabled=false;
+			}
+	</script>
     <?php endif ?>
 </div>
-<div id="People">
 
+
+<div id="People">
 <?php
 $conn = new mysqli("localhost", "root", "root", "registration");
-if($conn->connect_error){
+if($conn->connect_error)
+{
     die("Ошибка: " . $conn->connect_error);
 }
 $sql = "SELECT * FROM users";
-if($result = $conn->query($sql)){
+if($result = $conn->query($sql))
+{
     $rowsCount = $result->num_rows; // количество полученных строк
-	echo '<table>';
-	echo '<tr><td>Имя</td><td>День прождения</td><td>Ваш e-mail</td><td>Должность</td><td>Хобби</td><td>Текущие проекты</td><td>завершенные проекты</td><td>';
     foreach($result as $row)
 	{
-		echo '<tr><td>'. $row["username"] .'</td><td>'. $row["birthday"] .'</td><td>'. $row["email"] .'</td><td>'. $row["position"] .'</td><td>'. $row["hobbies"] .'</td><td>'. $row["current"] .'</td><td>'. $row["finish"] .'</td><td> ';
-    }
-	echo '</table>';
+
+		echo '<form method="post" action="index.php">
+		<div class="input-group">
+
+				<label>ID</label>
+				<input type="text"  class="p" name="id" readonly  value='. $row["id"] .'>
+			  </div>
+
+		<div class="input-group">
+				<label>Имя пользователя</label>
+				<input type="text" class="p" name="username" readonly value='. $row["username"] .'>
+			  </div>
+		
+			  <div class="input-group">
+				<label>Адрес электронной почты</label>
+				<input type="email"  class="p" name="email" readonly  value='. $row["email"] .'>
+			  </div>
+			  <div class="input-group">
+				<label>Дата рождения</label>
+				<input type="date"  class="p" name="birthday" readonly value='. $row["birthday"] .'>
+			  </div>
+		
+			  <div class="input-group">
+				<label>Должность</label>
+				<input type="text"  class="p" name="position" readonly value='. $row["position"] .'>
+			  </div>
+			
+			  <div class="input-group">
+				<label>Хобби</label>
+				<input type="text"  class="p" name="hobbies" readonly value='. $row["hobbies"] .'>
+			  </div>
+			
+			  <div class="input-group">
+				<label>Текущие проекты</label>
+				<input type="text" class="p" name="current" readonly value='. $row["current"] .'>
+			  </div>
+			  <div class="input-group">
+				<label>Завершенные проекты</label>
+				<input type="text" class="p" name="finish" value='. $row["finish"] .' readonly>
+			  </div>
+			  <div class="input-group">
+			  <input type = "submit" name = "check" value="Yes" onCLick="Pup()">
+			  </div>
+			 
+		</form>';
+
+}
+	
+	
+	
     $result->free();
-} else{
+}
+ else{
     echo "Ошибка: " . $conn->error;
 }
 $conn->close();
@@ -85,7 +179,35 @@ $conn->close();
 
 </div>
 	<div id="Progress">
-		страница 2
+	<?php 
+	
+	$arr = "";
+
+$conn = new mysqli("localhost", "root", "root", "registration");
+if($conn->connect_error){
+  die("Ошибка: " . $conn->connect_error);
+}
+$sql = "SELECT * FROM users WHERE username = '$username'";
+if($result = $conn->query($sql))
+{
+    $rowsCount = $result->num_rows; // количество полученных строк
+    foreach($result as $row)
+    {
+      $arr = $row["array_id"];
+      
+    }
+  $result->free();
+} 
+else
+{
+  echo "Ошибка: " . $conn->error;
+}
+$mas = explode(" ", $arr);
+
+
+	?>
+
 	</div>
+	<script type="text/javascript" src="file.js"></script>
 </body>
 </html>

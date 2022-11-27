@@ -7,6 +7,13 @@
 <body>
 <h2>Список пользователей</h2>
 <?php
+$str = "1 4 6 8 9 18 20";
+$pieces = explode(" ", $str);
+foreach($pieces as $val)
+{
+    echo $val."+";
+}
+
 $conn = new mysqli("localhost", "root", "root", "registration");
 if($conn->connect_error){
     die("Ошибка: " . $conn->connect_error);
