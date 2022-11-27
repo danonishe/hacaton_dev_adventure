@@ -19,6 +19,7 @@ $db = mysqli_connect('localhost', 'root', 'root', 'registration');
 // REGISTER USER
 if (isset($_POST['reg_user'])) 
 {
+  $arr="";
   // receive all input values from the form
   $username = mysqli_real_escape_string($db, $_POST['username']);
   $email = mysqli_real_escape_string($db, $_POST['email']);
@@ -63,11 +64,14 @@ if (isset($_POST['reg_user']))
   }
 
   // Finally, register user if there are no errors in the form
+foreach($errors as $error){
+echo $error;
+}
   if (count($errors) == 0) {
   	$password = md5($password_1);//encrypt the password before saving in the database
 
-  	$query = "INSERT INTO users (username, email, birthday,position,hobbies,current,finish, password) 
-  			  VALUES('$username', '$email','$birthday','$position', '$hobbies', '$current', '$finish',  '$password')";
+  	$query = "INSERT INTO users (username, email, birthday,position,hobbies,current,finish,array_id, password) 
+  			  VALUES('$username', '$email','$birthday','$position', '$hobbies', '$current', '$finish', '$arr', '$password')";
   	mysqli_query($db, $query);
 
   	$_SESSION['username'] = $username;
@@ -78,9 +82,13 @@ if (isset($_POST['reg_user']))
     $_SESSION['current'] = $current;
     $_SESSION['finish'] = $finish;
   	$_SESSION['success'] = "You are now logged in";
-  	header('location: index.php');
+    echo "INSERT INTO users (username, email, birthday,position,hobbies,current,finish,array_id, password)
+VALUES('$username', '$email','$birthday','$position', '$hobbies', '$current', '$finish', '$arr','$password')";
+header('location: index.php');
   }
 }
+
+
 
 if  (isset($_POST['save_user']))
 {
@@ -144,7 +152,8 @@ $sql1 = "UPDATE `users` SET `array_id` = '$id' WHERE `username` = '$username'";
 
 
 
-if (isset($_POST['login_user'])) {
+if (isset($_POST['login_user'])) 
+{
   $username = mysqli_real_escape_string($db, $_POST['username']);
   $password = mysqli_real_escape_string($db, $_POST['password']);
 
@@ -183,6 +192,7 @@ if (isset($_POST['login_user'])) {
           $_SESSION['current'] = $row["current"];
           $_SESSION['finish'] = $row["finish"];
           $_SESSION['position'] = $row["position"];
+          $_SESSION['array_id'] = $row["array_id"];
         }
       $result->free();
     } 

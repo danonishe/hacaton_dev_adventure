@@ -180,14 +180,20 @@ $conn->close();
 </div>
 	<div id="Progress">
 	<?php 
-	
+	$table = array ();
 	$arr = "";
+	$array_id=$_SESSION['array_id'];
 
 $conn = new mysqli("localhost", "root", "root", "registration");
 if($conn->connect_error){
   die("Ошибка: " . $conn->connect_error);
+
 }
+$username=$_SESSION['username'];
 $sql = "SELECT * FROM users WHERE username = '$username'";
+
+$qur = "SELECT * FROM users";
+
 if($result = $conn->query($sql))
 {
     $rowsCount = $result->num_rows; // количество полученных строк
@@ -202,11 +208,133 @@ else
 {
   echo "Ошибка: " . $conn->error;
 }
+if($result = $conn->query($qur))
+{
+    $rowsCount = $result->num_rows; // количество полученных строк
+    foreach($result as $row)
+    {
+     array_push($table, array($row['id'], $row['username'], $row['email'], $row['birthday'], $row['position'], $row['hobbies'], $row['current'],  $row['finish']));
+    }
+  $result->free();
+} 
+else
+{
+  echo "Ошибка: " . $conn->error;
+}
+
+$conn->close();
 $mas = explode(" ", $arr);
 
+$val1 = array_rand($mas, 1); 
+
+
+for ($i = 0; $i < count($table); $i++) 
+{
+
+if ($table[$i][0]==$mas[$val])
+{
+$val1 = $i;
+}
+}
+
+$val2 = array_rand($mas, 1); 
+
+
+for ($i = 0; $i < count($table); $i++) 
+{
+if ($table[$i][0]==$mas[$val2])
+{
+$val2 = $i;
+}
+}
+
+$val3 = array_rand($mas, 1); 
+
+for ($i = 0; $i < count($table); $i++) 
+{
+if ($table[$i][0]==$mas[$val3])
+{
+$val3 = $i;
+}
+}
+
+
+echo '<form method="post" id="MyForm">
+
+<div class="test">
+		<label class="q1" value="'. "$val1".'">У какого человека это хобби:'.$table[$val1][5].'</label>
+		<br>
+
+		<input type="radio" name ="hobbi" value="0">'.$table[0][1].'
+		<br>
+		<input type="radio" name ="hobbi" value="1">'.$table[1][1].'
+		<br>
+		<input type="radio" name ="hobbi" value="2">'.$table[2][1].'
+		<br>
+		<input type="radio" name ="hobbi" value="3">'.$table[3][1].'
+
+	  </div>
+	  
+<div class="test">
+<label  class="q" value="'. "$val2".'">Кто из этих людей на этой должности: '.$table[$val2][4].'</label>
+<br>
+
+<input type="radio" name ="post" value="0">'.$table[0][1].'
+<br>
+<input type="radio" name ="post" value="1">'.$table[1][1].'
+<br>
+<input type="radio" name ="post" value="2">'.$table[2][1].'
+<br>
+<input type="radio" name ="post" value="3">'.$table[3][1].'
+</div>
+
+<div class="test">
+<label  class="q" value="'."$val3".'">Кто из этих людей занимался этими проектами: '.$table[$val3][7].'</label>
+<br>
+
+<input type="radio" name ="end" value="0">'.$table[0][1].'
+<br>
+<input type="radio" name ="end" value="1">'.$table[1][1].'
+<br>
+<input type="radio" name ="end" value="2">'.$table[2][1].'
+<br>
+<input type="radio" name ="end" value="3">'.$table[3][1].'
+</div>
+
+	  
+	  <div class="input-group">
+	  <input type = "submit" name = "submit" value="Ответить">
+	  </div>
+	 <div id="Result">   </div>
+</form>';
 
 	?>
+<script >
+document.getElementById('MyForm').addEventListener("submit", Check);
+function Check(event)
+{
+    event.preventDefault();
+	var val=document.getElementById('MyForm');
 
+
+	var ans1 =  val.hobbi.value;
+	var ans2 = val.post.value;
+	var ans3 = val.end.value;
+	
+var r = document.getElementsByClassName('q');
+
+	var cnt = 0;
+	if (r[0].getAttribute('value') == ans1)
+	++cnt;
+	if (r[1].getAttribute('value') == ans2)
+	++cnt;
+	if (r[2].getAttribute('value')== ans3)
+	++cnt;
+	document.getElementById('Result').innerHTML=cnt + " правильных ответов!";
+	
+}
+
+</script>
 	</div>
 	<script type="text/javascript" src="file.js"></script>
 </body>

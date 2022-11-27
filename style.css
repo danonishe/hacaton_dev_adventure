@@ -2,9 +2,9 @@
   margin: 0px;
   padding: 0px;
 }
-body {
-  font-size: 120%;
-  background: #979595;
+body 
+{
+  background: #E5E4E2;
 }
 
 .header {
@@ -72,7 +72,7 @@ form, .content {
 {
 width: 100%;
 height: 200px;
-background-color: #e6de7a;
+background-color: #FFFF00;
 display:flex;
 align-items: flex-end;
 }
@@ -83,10 +83,13 @@ align-items: flex-end;
     font-size: 40px;
     height: 70px;
     border:0ch;
-    background-color: #e6de7a;
+    background-color:  #FFFF00;
     color:black;
     width: 33.3333%;
-    transform: skew(-30deg);
+}
+.knopka:hover
+{
+    background-color: #979354;
 }
 
 .exit
@@ -106,14 +109,11 @@ right: 2%;
 
 .exit:hover
 {
-    color: #e6de7a;
+    color:  #e7e786;
     background: #000;
 }
 
-.knopka:hover
-{
-    background-color: #979354;
-}
+
 
 table
 {

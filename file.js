@@ -1,3 +1,6 @@
+
+
+
 function inPeople()
 {
     document.getElementById('People').style.display = "block";
@@ -17,4 +20,5 @@ function inPeople()
      document.getElementById('Profile').style.display = "none";
      document.getElementById('Progress').style.display = "block";
 }
+
 
