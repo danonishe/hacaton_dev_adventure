@@ -50,7 +50,7 @@ include('server.php');
 
 <div id="Profile">
 
-<form method="post" action="index.php">
+<form method="post" action="index.php" id = "me">
 <div class="input-group">
   	  <label>Имя пользователя</label>
   	  <input type="text" class="p" name="username" readonly value="<?php echo $_SESSION['username']; ?>">
@@ -85,10 +85,10 @@ include('server.php');
   	  <input type="text" class="p" name="finish" value="<?php echo  $_SESSION['finish']; ?>" disabled>
   	</div>
 	  <div class="input-group">
-  	  <button type="submit" name="save_user">Сохранить</button>
+  	  <button class="btn" type="submit" name="save_user">Сохранить</button>
   	</div>
 	  <div class="input-group">
-  	<button type="button" onClick="Edit()"> Редактировать</button>
+  	<button class="btn" type="button" onClick="Edit()"> Редактировать</button>
   	</div>
 </form>
 
@@ -262,7 +262,7 @@ $val3 = $i;
 echo '<form method="post" id="MyForm">
 
 <div class="test">
-		<label class="q1" value="'. "$val1".'">У какого человека это хобби:'.$table[$val1][5].'</label>
+		<label id="q1" value="'. "$val1".'">У какого человека это хобби:'.$table[$val1][5].'</label>
 		<br>
 
 		<input type="radio" name ="hobbi" value="0">'.$table[0][1].'
@@ -276,7 +276,7 @@ echo '<form method="post" id="MyForm">
 	  </div>
 	  
 <div class="test">
-<label  class="q" value="'. "$val2".'">Кто из этих людей на этой должности: '.$table[$val2][4].'</label>
+<label  id="q2" value="'. "$val2".'">Кто из этих людей на этой должности: '.$table[$val2][4].'</label>
 <br>
 
 <input type="radio" name ="post" value="0">'.$table[0][1].'
@@ -289,7 +289,7 @@ echo '<form method="post" id="MyForm">
 </div>
 
 <div class="test">
-<label  class="q" value="'."$val3".'">Кто из этих людей занимался этими проектами: '.$table[$val3][7].'</label>
+<label  id="q3" value="'."$val3".'">Кто из этих людей занимался этими проектами: '.$table[$val3][7].'</label>
 <br>
 
 <input type="radio" name ="end" value="0">'.$table[0][1].'
@@ -321,14 +321,15 @@ function Check(event)
 	var ans2 = val.post.value;
 	var ans3 = val.end.value;
 	
-var r = document.getElementsByClassName('q');
-
+var r1 = document.getElementById('q1').getAttribute('value');
+var r2= document.getElementById('q2').getAttribute('value');
+var r3= document.getElementById('q3').getAttribute('value');
 	var cnt = 0;
-	if (r[0].getAttribute('value') == ans1)
+	if (r1 == ans1)
 	++cnt;
-	if (r[1].getAttribute('value') == ans2)
+	if (r2 == ans2)
 	++cnt;
-	if (r[2].getAttribute('value')== ans3)
+	if (r3== ans3)
 	++cnt;
 	document.getElementById('Result').innerHTML=cnt + " правильных ответов!";
 	
